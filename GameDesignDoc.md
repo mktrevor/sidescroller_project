@@ -62,5 +62,5 @@ The actual gameplay will be displayed below the menus and other display boxes. I
 lots of moving around. 
 
 ### Concept
-![alt text](http://i1318.photobucket.com/albums/t642/mktrevor/layout_zpsc4f7af42.jpg "Game layout")
+![alt text](http://i1318.photobucket.com/albums/t642/mktrevor/6afeb388-4832-4b9d-b74f-97298c1a21f9_zps7fb4dc61.jpg "Game layout")
 
