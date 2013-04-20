@@ -10,7 +10,7 @@ The enemies in my game include 5 different types of thugs.
 The Bulldozer simply runs across the screen in a single direction, speeding up as he goes. If he hits the player, the player will lose health.
 
 ### Blade
-![alt text](https://docs.google.com/file/d/0B1BPxtqj8Cl5UXptdTVVRkZheWM/ "Bulldozer")
+![alt text](https://drive.google.com/?tab=mo&authuser=0#folders/0B1BPxtqj8Cl5NGo4WHJmbHNTRFk "Bulldozer")
 The Blade will jump in on either side of the game window, coming and going at random, and throw knives at the player. The knives will inflict damage.
 
 ### Boxer
