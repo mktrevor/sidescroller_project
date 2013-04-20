@@ -1,12 +1,12 @@
 # Game - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Trevor Reed
+  + USC Email: trevorar@usc.edu
+  + USC ID: 5689597253
 
 ### Game Information
-  + Game Name: myAwsomeGame
-  + Game Description: One sentence game description
+  + Game Name: Magic Ninja
+  + Game Description: Become a magic ninja who fights against thugs bred for evil! Use your magical ninja powers for good!
   + [Game Design Doc](GameDesignDoc.md)
 
 
