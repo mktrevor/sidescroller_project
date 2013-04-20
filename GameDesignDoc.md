@@ -6,7 +6,7 @@
 The enemies in my game include 5 different types of thugs.
 
 ### Bulldozer
-![alt text]( "Bulldozer")
+![alt text](http://googledrive.com/mktrevor/PA5/bulldozer1.png "Bulldozer")
 The Bulldozer simply runs across the screen in a single direction, speeding up as he goes. If he hits the player, the player will lose health.
 
 ### Blade
