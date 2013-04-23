@@ -29,6 +29,8 @@
 #include <cmath>
 #include <cstdlib>
 
+#include "graphicswindow.h"
+
 class MainWindow : public QMainWindow {
 	Q_OBJECT
   
@@ -59,8 +61,6 @@ class MainWindow : public QMainWindow {
 		QPlainTextEdit *textBox;*/
 
 	public slots:
-		//Starts a new puzzle
-		void pressStart();
 };
 
 #endif

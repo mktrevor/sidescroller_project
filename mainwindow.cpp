@@ -24,8 +24,9 @@ MainWindow::MainWindow() {
     
     //GAME BOARD
     game = new GraphicsWindow();
+    setCentralWidget(game->getView());
 		
-		this->setMinimumSize(1000, 700);
+		this->setMinimumSize(1200, 700);
 }
 
 /** Deconstructor - deallocates all memory from the MainWindow */
