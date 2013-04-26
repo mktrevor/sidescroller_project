@@ -5,6 +5,8 @@ Creep::Creep(int pos) {
 	pic = new QPixmap("sprites/creep1.png");
 	altPic = new QPixmap("sprites/creep2.png");
 	
+	dead = 0;
+	
 	switch(pos) {
 		case 0:
 		x = 100;
@@ -57,8 +59,11 @@ Creep::~Creep() {
 }
 
 void Creep::move() {
+	if(health == 0) {
+		dead = 1;
+	}
 
-	if(y > 580 && vx == 0) {
+	if(y > 480 && vx == 0) {
 		vy = 0;
 		if(x < 500) {
 			vx = 5;
@@ -67,9 +72,12 @@ void Creep::move() {
 		}
 	}
 	
+	if(x < -250 || x > 1150) {
+		dead = 1;
+	}
+	
 	x += vx;
 	y += vy;
 	
 	setPos(x, y);
-	
 }

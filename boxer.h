@@ -6,6 +6,7 @@
 class Boxer : public Thug {
 	private:
 		QPixmap *altPic;
+		int randNum;
 		
 	public:
 		Boxer(bool side);

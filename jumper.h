@@ -5,8 +5,11 @@
 
 class Jumper : public Thug {
 	private:
+		QPixmap *altPic;
 		
 	public:
+		Jumper(bool side);
+		~Jumper();
 		void move();
 };
 		

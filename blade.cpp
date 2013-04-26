@@ -5,51 +5,53 @@ Blade::Blade(int pos) {
 	pic = new QPixmap("sprites/blade1.png");
 	altPic = new QPixmap("sprites/blade2.png");
 	
+	dead = 0;
+	
 	switch(pos) {
 		case 0:
 		x = -200;
-		y = 500;
-		vx = 3;
+		y = 300;
+		vx = 1;
 		vy = 0;
 		setPixmap(*pic);
 		break;
 		
 		case 1:
 		x = -200;
-		y = 550;
-		vx = 3;
+		y = 400;
+		vx = 1;
 		vy = 0;
 		setPixmap(*pic);
 		break;
 		
 		case 2:
 		x = -200;
-		y = 600;
-		vx = 3;
+		y = 500;
+		vx = 1;
 		vy = 0;
 		setPixmap(*pic);
 		break;
 		
 		case 3:
 		x = 1100;
-		y = 500;
-		vx = -3;
+		y = 300;
+		vx = -1;
 		vy = 0;
 		setPixmap(*altPic);
 		break;
 		
 		case 4:
 		x = 1100;
-		y = 550;
-		vx = -3;
+		y = 400;
+		vx = -1;
 		vy = 0;
 		setPixmap(*altPic);
 		break;
 		
 		case 5:
 		x = 1100;
-		y = 600;
-		vx = -3;
+		y = 500;
+		vx = -1;
 		vy = 0;
 		setPixmap(*altPic);
 		break;
@@ -66,12 +68,19 @@ Blade::~Blade() {
 }
 
 void Blade::move() {
+	if(health == 0) {
+		dead = 1;
+	}
 
-	if(x < 500 && x > -100) {
-		vx = 0;
+	if(x < 500 && x > -80) {
+		vx *= -1;
 	}
 	if(x > 500 && x < 1000) {
-		vx = 0;
+		vx *= -1;
+	}
+	
+	if(x < -250 || x > 1150) {
+		dead = 1;
 	}
 	
 	x += vx;
