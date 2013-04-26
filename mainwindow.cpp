@@ -100,6 +100,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 	if(e->key() == Qt::Key_Left) {
 		game->getNinja()->moveLeft();
 	}
+	if(e->key() == Qt::Key_Up) {
+		game->getNinja()->jump();
+	}
 	if(e->key() == Qt::Key_P) {
 		pause();
 	}

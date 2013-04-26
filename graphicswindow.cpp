@@ -20,7 +20,7 @@ GraphicsWindow::GraphicsWindow() {
   setBackgroundBrush(QImage("sprites/background.png"));
   //setCacheMode(QGraphicsView::CacheBackground);
   timer = new QTimer;
-  timer->setInterval(50);
+  timer->setInterval(60);
   interval = 50;
   connect(timer, SIGNAL(timeout()), this, SLOT(update()));
   
@@ -70,16 +70,16 @@ void GraphicsWindow::checkDead() {
 
 void GraphicsWindow::update() {
 	counter++;
-	if(counter > 500 && interval > 5) {
-		interval = (interval * 2) / 3;
+	if(counter > 500 && interval > 10) {
+		interval = (interval * 4) / 5;
 		timer->setInterval(interval);
 		counter = 0;
 	}
 	
 	ninja->update();
 	
-	srand(counter * 53);
-	int num = rand() % 1000;
+	srand(rand() * rand());
+	int num = rand() % 2000;
 	switch(num) {
 		case 0:
 		thugs.push_back(new Creep(0));

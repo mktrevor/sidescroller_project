@@ -27,7 +27,9 @@ void Ninja::moveLeft() {
 	vx = -9;
 }
 
-void Ninja::jump() { }
+void Ninja::jump() {	
+	vy = -25;
+}
 
 void Ninja::stop() {
 	vx = 0;
@@ -35,6 +37,27 @@ void Ninja::stop() {
 }
 
 void Ninja::update() {
+	/*if(vy >= 0) {
+		if(vy < 15) {
+			vy = 15;
+		} else {
+			vy++;
+		}
+	}
+	if(y <= 350 && vy < 0) {
+		vy += 5;
+	} else if (vy < 0) {
+		vy++;
+	}*/
+	if(y < 500) {
+		vy = vy + 2;
+	}
+	
+	if(y > 475 && vy > 0) {
+		vy = 0;
+		y = 500;
+	}
+		
 	x += vx;
 	y += vy;
 	setPos(x,y);
