@@ -10,9 +10,12 @@ class Thug : public QGraphicsPixmapItem {
 		int vx, vy; //X and Y velocity
 		int health;
 		QPixmap *pic;
+		bool dead;
 		
 	public:
 		virtual void move() = 0;
+		bool isDead() {	return dead; }
+		void hit() { health--; }
 };
 		
 #endif
