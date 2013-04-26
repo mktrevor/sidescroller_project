@@ -1,4 +1,4 @@
-/** A QWidget to hold the puzzle tiles and handle their movement
+/** A QWidget to handle the game display, managing the character and enemy objects and all other gameplay
 
 	@author Trevor Reed
 */
@@ -12,40 +12,36 @@
 #include <QTimer>
 #include <QGraphicsItemAnimation>
 #include <QErrorMessage>
-#include <QPalette>
+#include <ctime>
 #include "thug.h"
 #include "bulldozer.h"
 #include "creep.h"
 #include "blade.h"
 #include "boxer.h"
+#include "jumper.h"
+#include "ninja.h"
 
-class GraphicsWindow : public QWidget {
+class GraphicsWindow : public QGraphicsView {
     Q_OBJECT
     
 	public:		
     GraphicsWindow();
     ~GraphicsWindow();
     
-    QGraphicsView* getView();
+    Ninja* getNinja();
 
     void show();
     
+    void start();
+    QTimer* getTimer();
+    
 	private:
-		QPixmap *bullPic;
+		int counter;
+		int interval;
+		
+		Ninja *ninja;
+		
 		QVector<Thug*> thugs;
-		Bulldozer *bull1;
-		Bulldozer *bull2;
-		
-		Creep *creep1;
-		Creep *creep2;
-		Creep *creep3;
-		Creep *creep4;
-		
-		Blade *blade1;
-		Blade *blade2;
-		
-		Boxer *boxer1;
-		Boxer *boxer2;
 		
 		QTimer *timer;
     
@@ -53,10 +49,13 @@ class GraphicsWindow : public QWidget {
     QErrorMessage *error;
     
     QGraphicsScene *scene;
-    QGraphicsView *view;
+    
+    //Functions to run in the update SLOT
+    void moveThugs();
+    void checkDead();
     
 	public slots:
-		void moveThugs();
+		void update();
 };
 
 #endif
