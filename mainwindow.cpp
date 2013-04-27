@@ -2,6 +2,7 @@
 
 /** Default constructor for MainWindow */
 MainWindow::MainWindow() {
+	name = "Trevor";
 	error = new QErrorMessage;
 	
 	//MENU BAR
@@ -109,6 +110,11 @@ void MainWindow::update() {
 		error->showMessage("GAME OVER");
 		pause();
 	}
+	
+	displayWidget->setName(name);
+	displayWidget->setScore(QString::number(game->getScore()));
+	displayWidget->setHealth(QString::number(game->getNinja()->getHealth()));
+	displayWidget->setLives(QString::number(game->getNinja()->getLives()));
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e) {

@@ -52,9 +52,13 @@ QVector<Fireball*>* Ninja::getFire() {
 
 void Ninja::update() {
 	if(health == 0) {
+		lives--;
+		health = 100;
+	}
+	if(lives == 0) {
+		health = 0;
 		dead = 1;
 	}
-		
 
 	if(y < 500) {
 		vy = vy + 6;

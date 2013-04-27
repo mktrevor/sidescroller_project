@@ -41,6 +41,8 @@ class MainWindow : public QMainWindow {
 		void show();
   
 	private:	
+		QString name;
+		
 		//Menu Bar components
 		QMenuBar *mb;
 		QMenu *file;

@@ -33,6 +33,8 @@ class GraphicsWindow : public QGraphicsView {
 
     void show();
     
+    int getScore();
+    
     bool gameOver();
     
     void start();
@@ -41,6 +43,7 @@ class GraphicsWindow : public QGraphicsView {
 	private:
 		int counter;
 		int interval;
+		int score;
 		
 		Ninja *ninja;
 		

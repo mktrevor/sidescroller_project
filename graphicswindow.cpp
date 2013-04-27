@@ -12,6 +12,7 @@ GraphicsWindow::GraphicsWindow() {
   setScene(scene);
 
   counter = 0;
+  score = 0;
   
   scene->setSceneRect(0,0,1000,600);
   setMinimumSize(1200, 600);
@@ -52,7 +53,10 @@ void GraphicsWindow::fireball(int direction) {
 	}
 }
 
-//Implement!
+int GraphicsWindow::getScore() {
+	return score;
+}
+
 void GraphicsWindow::start() {
   timer->start();
 }
@@ -72,6 +76,7 @@ void GraphicsWindow::checkDead() {
 		if(thugs[i]->isDead() == 1) {
 			delete thugs[i];
 			thugs.remove(i);
+			score += 250;
 		}
 	}
 }
@@ -88,6 +93,10 @@ void GraphicsWindow::update() {
 	ninja->update();
 	
 	counter++;
+	if(counter % 5 == 0) {
+		score += 100;
+	}
+	
 	if(counter > 500 && interval > 10) {
 		interval = (interval * 4) / 5;
 		timer->setInterval(interval);
