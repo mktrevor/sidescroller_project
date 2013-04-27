@@ -28,7 +28,7 @@ Jumper::Jumper(bool side) {
 		vy = 5;
 	}
 	
-	health = 2;
+	health = 4;
 }
 
 Jumper::~Jumper() {

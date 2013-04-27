@@ -3,25 +3,35 @@
 
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
+#include "fireball.h"
 
 class Ninja : public QGraphicsPixmapItem {
 	private:
 		QPixmap *pic;
+		QVector<Fireball*> fireballs;
 		
-	public:
-		Ninja();
-		~Ninja();
+		bool dead;
 		
 		int health;
 		int x, y;
 		int vx, vy;
+		
+	public:
+		Ninja();
+		~Ninja();
 		
 		void moveRight();
 		void moveLeft();
 		void jump();
 		void stop();
 		
+		QVector<Fireball*>* getFire();
+		
+		void hit();
 		void update();
+		bool getDead();
+		
+		Fireball* shoot(int direction);
 		
 };
 

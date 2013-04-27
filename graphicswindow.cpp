@@ -14,8 +14,8 @@ GraphicsWindow::GraphicsWindow() {
   counter = 0;
   
   scene->setSceneRect(0,0,1000,600);
-  //setMinimumSize(1000, 500);
-  //setMaximumSize(1000, 500);
+  setMinimumSize(1200, 600);
+  setMaximumSize(1200, 600);
   
   setBackgroundBrush(QImage("sprites/background.png"));
   //setCacheMode(QGraphicsView::CacheBackground);
@@ -44,6 +44,14 @@ Ninja* GraphicsWindow::getNinja() {
 	return ninja;
 }
 
+void GraphicsWindow::fireball(int direction) {
+	Fireball* fire;
+	fire = ninja->shoot(direction);
+	if(fire != NULL) {
+		scene->addItem(fire);
+	}
+}
+
 //Implement!
 void GraphicsWindow::start() {
   timer->start();
@@ -69,6 +77,16 @@ void GraphicsWindow::checkDead() {
 }
 
 void GraphicsWindow::update() {
+	
+	checkDead();
+	moveThugs();
+	
+	ninja->update();
+	
+	if(ninja->getDead()) {
+		gameOver()
+	}
+	
 	counter++;
 	if(counter > 500 && interval > 10) {
 		interval = (interval * 4) / 5;
@@ -76,7 +94,21 @@ void GraphicsWindow::update() {
 		counter = 0;
 	}
 	
-	ninja->update();
+	for(int i = 0; i < thugs.size(); i++) {
+		for(int j = 0; j < ninja->getFire()->size(); j++) {
+			if(thugs[i]->collidesWithItem(ninja->getFire()->at(j))) {
+				thugs[i]->hit();
+				delete ninja->getFire()->at(j);
+				ninja->getFire()->remove(j);
+			}
+		}
+	}
+	
+	for(int i = 0; i < thugs.size(); i++) {
+		if(thugs[i]->collidesWithItem(ninja)) {
+			ninja->hit();
+		}
+	}
 	
 	srand(rand() * rand());
 	int num = rand() % 2000;
@@ -183,7 +215,4 @@ void GraphicsWindow::update() {
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 	}
-		
-	moveThugs();
-	checkDead();
 }

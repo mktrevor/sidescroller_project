@@ -28,7 +28,7 @@ Boxer::Boxer(bool side) {
 		vy = 0;
 	}
 	
-	health = 3;
+	health = 5;
 }
 
 Boxer::~Boxer() {

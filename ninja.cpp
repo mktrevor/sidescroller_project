@@ -20,40 +20,46 @@ Ninja::~Ninja() {
 }
 
 void Ninja::moveRight() {
-	vx = 9;
+	vx = 12;
 }
 
 void Ninja::moveLeft() {
-	vx = -9;
+	vx = -12;
 }
 
 void Ninja::jump() {	
-	vy = -25;
+	if(y == 500) {
+		vy = -50;
+	}
 }
 
 void Ninja::stop() {
 	vx = 0;
-	vy = 0;
+}
+
+Fireball* Ninja::shoot(int direction) {
+	if(fireballs.size() < 4) {
+		fireballs.push_back(new Fireball(direction, x, y));
+		return fireballs[fireballs.size() - 1];
+	}
+	return NULL;
+}
+		
+QVector<Fireball*>* Ninja::getFire() {
+	return &fireballs;
 }
 
 void Ninja::update() {
-	/*if(vy >= 0) {
-		if(vy < 15) {
-			vy = 15;
-		} else {
-			vy++;
-		}
+	if(health == 0) {
+		dead = 1;
 	}
-	if(y <= 350 && vy < 0) {
-		vy += 5;
-	} else if (vy < 0) {
-		vy++;
-	}*/
+		
+
 	if(y < 500) {
-		vy = vy + 2;
+		vy = vy + 6;
 	}
 	
-	if(y > 475 && vy > 0) {
+	if(y > 450 && vy > 0) {
 		vy = 0;
 		y = 500;
 	}
@@ -61,4 +67,21 @@ void Ninja::update() {
 	x += vx;
 	y += vy;
 	setPos(x,y);
+	
+	for(int i = 0; i < fireballs.size(); i++) {
+		fireballs[i]->update();
+		QPoint point = fireballs[i]->getPos();
+		if(point.x() > 1100 || point.x() < -100 || point.y() < 0 || point.y() > 600) {
+			delete fireballs[i];
+			fireballs.remove(i);
+		}
+	}
+}
+
+void Ninja::hit() {
+	health--;
+}
+
+bool Ninja::getDead() {
+	return dead;
 }

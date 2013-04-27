@@ -29,6 +29,7 @@ class GraphicsWindow : public QGraphicsView {
     ~GraphicsWindow();
     
     Ninja* getNinja();
+    void fireball(int direction);
 
     void show();
     
@@ -53,6 +54,7 @@ class GraphicsWindow : public QGraphicsView {
     //Functions to run in the update SLOT
     void moveThugs();
     void checkDead();
+    void gameOver();
     
 	public slots:
 		void update();

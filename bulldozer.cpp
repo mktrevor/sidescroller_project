@@ -27,7 +27,7 @@ Bulldozer::Bulldozer(bool side) {
 		vy = 0;
 	}
 	
-	health = 5;
+	health = 4;
 }
 
 Bulldozer::~Bulldozer() {
