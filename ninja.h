@@ -13,6 +13,7 @@ class Ninja : public QGraphicsPixmapItem {
 		bool dead;
 		
 		int health;
+		int lives;
 		int x, y;
 		int vx, vy;
 		
@@ -30,6 +31,8 @@ class Ninja : public QGraphicsPixmapItem {
 		void hit();
 		void update();
 		bool getDead();
+		int getHealth();
+		int getLives();
 		
 		Fireball* shoot(int direction);
 		

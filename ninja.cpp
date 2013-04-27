@@ -5,6 +5,7 @@ Ninja::Ninja() {
 	setPixmap(*pic);
 	
 	health = 100;
+	lives = 3;
 	
 	x = 500;
 	y = 500;
@@ -84,4 +85,12 @@ void Ninja::hit() {
 
 bool Ninja::getDead() {
 	return dead;
+}
+
+int Ninja::getHealth() {
+	return health;
+}
+
+int Ninja::getLives() {
+	return lives;
 }

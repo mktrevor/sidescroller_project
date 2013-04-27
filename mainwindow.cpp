@@ -42,6 +42,14 @@ MainWindow::MainWindow() {
   
   addToolBar(toolBar);
   
+  //TOP WIDGET
+  display = new QDockWidget;
+  displayWidget = new DisplayWidget;
+  display->setWidget(displayWidget);
+  addDockWidget(Qt::TopDockWidgetArea, display);
+  display->setMaximumSize(1200, 100);
+  display->setFeatures(0x00);
+  
   //GAME BOARD
   game = new GraphicsWindow();
   setCentralWidget(game);
@@ -51,6 +59,7 @@ MainWindow::MainWindow() {
 	setMaximumSize(1200, 700);
 	
 	paused = 0;
+	setWindowTitle("MAGIC NINJA");
 	setFocus();
 }
 

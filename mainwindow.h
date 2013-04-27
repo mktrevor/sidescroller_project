@@ -10,7 +10,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QTimer>
-#include <QTimeLine>
+//#include <QTimeLine>
 #include <QGraphicsItemAnimation>
 #include <QPushButton>
 #include <QMenu>
@@ -21,10 +21,13 @@
 #include <QDockWidget>
 #include <QErrorMessage>
 #include <QLabel>
+#include <QLineEdit>
 #include <QKeyEvent>
-#include <cmath>
+#include <QHBoxLayout>
+
 #include <cstdlib>
 
+#include "displaywidget.h"
 #include "graphicswindow.h"
 #include "ninja.h"
 
@@ -54,6 +57,10 @@ class MainWindow : public QMainWindow {
 		
 		//Central widget components
 		GraphicsWindow *game;
+		
+		//Top dock widget (for showing score, name, health, etc.)
+		QDockWidget *display;
+		DisplayWidget *displayWidget;
 		
 		//Message for errors, etc.
 		QErrorMessage *error;

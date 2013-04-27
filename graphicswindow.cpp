@@ -17,7 +17,7 @@ GraphicsWindow::GraphicsWindow() {
   setMinimumSize(1200, 600);
   setMaximumSize(1200, 600);
   
-  setBackgroundBrush(QImage("sprites/background.png"));
+  setBackgroundBrush(QImage("sprites/background1.png"));
   //setCacheMode(QGraphicsView::CacheBackground);
   timer = new QTimer;
   timer->setInterval(60);
