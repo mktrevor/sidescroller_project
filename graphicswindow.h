@@ -33,6 +33,8 @@ class GraphicsWindow : public QGraphicsView {
 
     void show();
     
+    bool gameOver();
+    
     void start();
     QTimer* getTimer();
     
@@ -54,7 +56,6 @@ class GraphicsWindow : public QGraphicsView {
     //Functions to run in the update SLOT
     void moveThugs();
     void checkDead();
-    void gameOver();
     
 	public slots:
 		void update();

@@ -45,6 +45,7 @@ MainWindow::MainWindow() {
   //GAME BOARD
   game = new GraphicsWindow();
   setCentralWidget(game);
+  connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 	
 	setMinimumSize(1200, 700);
 	setMaximumSize(1200, 700);
@@ -76,6 +77,7 @@ void MainWindow::startSlot() {
 		delete game;
 		game = new GraphicsWindow;
 		setCentralWidget(game);
+		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 	}
 	game->start();	
 	setFocus();
@@ -93,15 +95,34 @@ void MainWindow::pause() {
 
 void MainWindow::options() { }
 
+void MainWindow::update() {
+	if(game->gameOver()) {
+		error->showMessage("GAME OVER");
+		pause();
+	}
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *e) {
-	if(e->key() ==  Qt::Key_Right) {
+	if(e->key() ==  Qt::Key_D) {
 		game->getNinja()->moveRight();
 	}
-	if(e->key() == Qt::Key_Left) {
+	if(e->key() == Qt::Key_A) {
 		game->getNinja()->moveLeft();
 	}
-	if(e->key() == Qt::Key_Up) {
+	if(e->key() == Qt::Key_W) {
 		game->getNinja()->jump();
+	}
+	if(e->key() ==  Qt::Key_Right) {
+		game->fireball(0);
+	}
+	if(e->key() == Qt::Key_Left) {
+		game->fireball(1);
+	}
+	if(e->key() == Qt::Key_Up) {
+		game->fireball(2);
+	}
+	if(e->key() == Qt::Key_Down) {
+		game->fireball(3);
 	}
 	if(e->key() == Qt::Key_P) {
 		pause();
@@ -115,7 +136,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e) {
-	if(e->key() ==  Qt::Key_Right || e->key() == Qt::Key_Left) {
+	if(e->key() ==  Qt::Key_D || e->key() == Qt::Key_A) {
 		game->getNinja()->stop();
 	}
 }

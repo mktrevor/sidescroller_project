@@ -76,16 +76,16 @@ void GraphicsWindow::checkDead() {
 	}
 }
 
+bool GraphicsWindow::gameOver() {
+	return ninja->getDead();
+}
+
 void GraphicsWindow::update() {
 	
 	checkDead();
 	moveThugs();
 	
 	ninja->update();
-	
-	if(ninja->getDead()) {
-		gameOver()
-	}
 	
 	counter++;
 	if(counter > 500 && interval > 10) {

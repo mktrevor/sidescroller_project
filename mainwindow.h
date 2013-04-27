@@ -66,6 +66,8 @@ class MainWindow : public QMainWindow {
 		void startSlot();
 		void pause();
 		void options();
+		
+		void update();
 };
 
 #endif
