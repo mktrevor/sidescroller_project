@@ -12,7 +12,7 @@ Blade::Blade(int pos) {
 		case 0:
 		x = -200;
 		y = 300;
-		vx = 1;
+		vx = 4;
 		vy = 0;
 		setPixmap(*pic);
 		break;
@@ -20,7 +20,7 @@ Blade::Blade(int pos) {
 		case 1:
 		x = -200;
 		y = 400;
-		vx = 1;
+		vx = 4;
 		vy = 0;
 		setPixmap(*pic);
 		break;
@@ -28,7 +28,7 @@ Blade::Blade(int pos) {
 		case 2:
 		x = -200;
 		y = 500;
-		vx = 1;
+		vx = 4;
 		vy = 0;
 		setPixmap(*pic);
 		break;
@@ -36,7 +36,7 @@ Blade::Blade(int pos) {
 		case 3:
 		x = 1100;
 		y = 300;
-		vx = -1;
+		vx = -4;
 		vy = 0;
 		setPixmap(*altPic);
 		break;
@@ -44,7 +44,7 @@ Blade::Blade(int pos) {
 		case 4:
 		x = 1100;
 		y = 400;
-		vx = -1;
+		vx = -4;
 		vy = 0;
 		setPixmap(*altPic);
 		break;
@@ -52,7 +52,7 @@ Blade::Blade(int pos) {
 		case 5:
 		x = 1100;
 		y = 500;
-		vx = -1;
+		vx = -4;
 		vy = 0;
 		setPixmap(*altPic);
 		break;

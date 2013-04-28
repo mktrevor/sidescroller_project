@@ -25,7 +25,7 @@ MainWindow::MainWindow() {
   
   startButton = new QPushButton("Start (F1)");
   quitButton = new QPushButton("Quit (Esc)");
-  pauseButton = new QPushButton("Pause (P)");
+  pauseButton = new QPushButton("Pause/Resume (P)");
   
   connect(startButton, SIGNAL(clicked()), this, SLOT(startSlot()));
   connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -97,9 +97,8 @@ void MainWindow::startSlot() {
 		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 		game->start();	
 		gameInProgress = 1;
-		setFocus();
-		return;
 	}
+
 	setFocus();
 }
 
@@ -126,7 +125,6 @@ void MainWindow::update() {
 		gameOver = new InfoScreen(1);
 		setCentralWidget(gameOver);
 	}
-	
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e) {

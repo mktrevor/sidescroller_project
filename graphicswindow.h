@@ -48,6 +48,7 @@ class GraphicsWindow : public QGraphicsView {
 		Ninja *ninja;
 		
 		QVector<Thug*> thugs;
+		QVector<Knife*> knives;
 		
 		QTimer *timer;
     

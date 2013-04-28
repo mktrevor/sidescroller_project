@@ -22,8 +22,8 @@ GraphicsWindow::GraphicsWindow() {
   setBackgroundBrush(QImage("sprites/background1.png"));
   //setCacheMode(QGraphicsView::CacheBackground);
   timer = new QTimer;
-  timer->setInterval(60);
-  interval = 50;
+  timer->setInterval(70);
+  interval = 70;
   connect(timer, SIGNAL(timeout()), this, SLOT(update()));
   
   ninja = new Ninja();
@@ -34,7 +34,8 @@ GraphicsWindow::GraphicsWindow() {
 GraphicsWindow::~GraphicsWindow() {
 	timer->stop();
 	delete timer;
-	for(int i = 0; i < thugs.size(); i++) {
+	int numThugs = thugs.size();
+	for(int i = 0; i < numThugs; i++) {
 		delete thugs[i];
 	}
 	delete error;
@@ -69,11 +70,19 @@ QTimer* GraphicsWindow::getTimer() {
 void GraphicsWindow::moveThugs() {
 	for(int i = 0; i < thugs.size(); i++) {
 		thugs[i]->move();
+		if(thugs[i]->getKnifeCheck()) {
+			knives.push_back(thugs[i]->throwKnife());
+			scene->addItem(knives[knives.size() - 1]);
+		}
+	}
+	for(int i = 0; i < knives.size(); i++) {
+		knives[i]->update();
 	}
 }
 
 void GraphicsWindow::checkDead() {
-	for(int i = 0; i < thugs.size(); i++) {
+	int numThugs = thugs.size();
+	for(int i = 0; i < numThugs; i++) {
 		if(thugs[i]->isDead() == 1) {
 			delete thugs[i];
 			thugs.remove(i);
@@ -93,11 +102,11 @@ void GraphicsWindow::update() {
 	
 	ninja->update();
 	
-	counter++;
+	counter += 1;
 	score++;
 	
-	if(counter > 500 && interval > 10) {
-		interval = (interval * 4) / 5;
+	if(counter > 4000/interval && interval > 15) {
+		interval -= 1;
 		timer->setInterval(interval);
 		counter = 0;
 	}
@@ -118,8 +127,22 @@ void GraphicsWindow::update() {
 		}
 	}
 	
+	for(int i = 0; i < knives.size(); i++) {
+		if(knives[i]->collidesWithItem(ninja)) {
+			ninja->hit();
+			ninja->hit();
+			ninja->hit();
+			delete knives[i];
+			knives.remove(i);
+		}
+		if(knives[i]->getPos().x() < -200 || knives[i]->getPos().y() > 1200) {
+			delete knives[i];
+			knives.remove(i);
+		}
+	}
+	
 	srand(rand() * counter);
-	int num = rand() % 1500;
+	int num = rand() % 1200;
 	switch(num) {
 		case 0:
 		thugs.push_back(new Creep(0));
@@ -220,5 +243,19 @@ void GraphicsWindow::update() {
 		thugs.push_back(new Blade(5));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
+	}
+	
+	if(ninja->lifeLost()) {
+		int numThugs = thugs.size();
+		for(int i = numThugs - 1; i >= 0; i--) {
+			delete thugs[i];
+			thugs.remove(i);
+		}
+		for(int i = 0; i < knives.size(); i++) {
+			delete knives[i];
+			knives.remove(i);
+		}
+		timer->stop();
+		error->showMessage("You lost a life! Press 'p' or \"Pause/Resume\" to continue.");
 	}
 }
