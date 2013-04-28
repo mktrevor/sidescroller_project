@@ -6,11 +6,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsRectItem>
 #include <QTimer>
-//#include <QTimeLine>
 #include <QGraphicsItemAnimation>
 #include <QPushButton>
 #include <QMenu>

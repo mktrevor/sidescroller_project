@@ -2,8 +2,11 @@
 
 /** Default constructor for MainWindow */
 MainWindow::MainWindow() {
-	name = "Trevor";
+	
 	error = new QErrorMessage;
+	inputName = new QInputDialog();
+	inputName->setLabelText("Please enter your name");
+	inputName->setInputMode(QInputDialog::TextInput);
 	
 	//MENU BAR
 	mb = menuBar();
@@ -64,16 +67,27 @@ MainWindow::MainWindow() {
 /** Deconstructor - deallocates all memory from the MainWindow */
 MainWindow::~MainWindow() {
 	delete error;
+	delete inputName;
 
 	//Deallocation of menu bar
 	delete start;
 	delete quit;
 	delete file;
 	
+	//Deallocation of toolbar
+	delete startButton;
+	delete quitButton;
+	delete pauseButton;
+	delete toolBar;
+	
 	//Deallocation of game board
 	if(gameInProgress) {
 		delete game;
 	}
+	
+	//Deallocation of top widget
+	delete displayWidget;
+	delete display;
 }
 
 /** Displays the MainWindow */
@@ -82,10 +96,16 @@ void MainWindow::show() {
 }
 
 void MainWindow::quitGame() {
+	if(!paused && gameInProgress) {
+		pause();
+	}
 	question = new QuestionBox("Are you sure you want to quit?", "Quit Game");
 	if(question->exec() == QMessageBox::No) {
 		setFocus();
 		delete question;
+		if(gameInProgress) {
+			pause();
+		}
 		return;
 	}
 		qApp->quit();
@@ -93,18 +113,39 @@ void MainWindow::quitGame() {
 	
 void MainWindow::startSlot() { 
 	question = new QuestionBox("Start a new game?", "New Game");
+	if(gameInProgress && !paused) {
+		pause();
+	}
 	if(question->exec() == QMessageBox::No) {
 		setFocus();
 		delete question;
+		if(gameInProgress) {
+			pause();
+		}
 		return;
 	}
-	if(!gameInProgress) {
+	if(!gameInProgress && !paused) {
+		
+		bool ok;
+		name = inputName->getText(this, tr("Name"), tr("Please enter your name."), QLineEdit::Normal, "", &ok);
+		if(!ok) {
+			setFocus();
+			return;
+		}
+		displayWidget->setName(name);
 		game = new GraphicsWindow;
 		setCentralWidget(game);
 		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 		game->start();
 		gameInProgress = 1;
 	} else if(game->getTimer()->isActive() || paused) {
+		bool ok;
+		name = inputName->getText(this, tr("Name"), tr("Please enter your name."), QLineEdit::Normal, "", &ok);
+		if(!ok) {
+			setFocus();
+			return;
+		}
+		displayWidget->setName(name);
 		delete game;
 		game = new GraphicsWindow;
 		setCentralWidget(game);
@@ -116,6 +157,9 @@ void MainWindow::startSlot() {
 }
 
 void MainWindow::pause() {
+	if(!gameInProgress) {
+		return;
+	}
 	if(game->getTimer()->isActive()) {
 		game->getTimer()->stop();
 	} else {
@@ -126,7 +170,6 @@ void MainWindow::pause() {
 }
 
 void MainWindow::update() {
-	displayWidget->setName(name);
 	displayWidget->setScore(QString::number(game->getScore()));
 	displayWidget->setHealth(QString::number(game->getNinja()->getHealth()));
 	displayWidget->setLives(QString::number(game->getNinja()->getLives()));
@@ -137,6 +180,9 @@ void MainWindow::update() {
 		delete game;
 		gameOver = new InfoScreen(1);
 		setCentralWidget(gameOver);
+	}
+	if(!game->getTimer()->isActive()) {
+		paused = 1;
 	}
 }
 
@@ -171,7 +217,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 		startSlot();
 	}
 	if(e->key() == Qt::Key_Escape) {
-		qApp->quit();
+		quitGame();
 	}
 }
 

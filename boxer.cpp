@@ -1,13 +1,13 @@
 #include <iostream>
 #include "boxer.h"
 
-Boxer::Boxer(bool side) {
+Boxer::Boxer(bool side, int num) {
 	pic = new QPixmap("sprites/boxer1.png");
 	altPic = new QPixmap("sprites/boxer2.png");
 	
 	dead = 0;
 	checkKnife = 0;
-	randNum = 48151623;
+	randNum = num;
 	
 	if(side == 0) {
 		x = -200;
@@ -46,7 +46,7 @@ void Boxer::move() {
 	
 	srand(randNum);
 	randNum = rand() % 100000;
-	if(randNum > 98500 && vx < 0) {
+	if(randNum > 97500 && vx < 0) {
 		vx *= -1;
 		setPixmap(*pic);
 	}

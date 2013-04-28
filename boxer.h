@@ -10,7 +10,7 @@ class Boxer : public Thug {
 		int randNum;
 		
 	public:
-		Boxer(bool side);
+		Boxer(bool side, int num);
 		~Boxer();
 		void move();
 		Knife* throwKnife();

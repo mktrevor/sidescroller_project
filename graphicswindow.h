@@ -50,11 +50,10 @@ class GraphicsWindow : public QGraphicsView {
 		QVector<Thug*> thugs;
 		QVector<Knife*> knives;
 		
-		QTimer *timer;
-    
-    //Error message
-    QErrorMessage *error;
-    
+		//Error message
+		QErrorMessage *error;
+		
+		QTimer *timer;    
     QGraphicsScene *scene;
     
     //Functions to run in the update SLOT

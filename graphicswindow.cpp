@@ -1,6 +1,4 @@
 #include "graphicswindow.h"
-#include <iostream>
-#include <ctime>
 
 using namespace std;
 
@@ -8,7 +6,7 @@ using namespace std;
 	@param dimension of board (3 or 4)
 */
 GraphicsWindow::GraphicsWindow() {
-	error = new QErrorMessage();
+	error = new QErrorMessage;
   scene = new QGraphicsScene();
   setScene(scene);
 
@@ -34,12 +32,14 @@ GraphicsWindow::GraphicsWindow() {
 GraphicsWindow::~GraphicsWindow() {
 	timer->stop();
 	delete timer;
-	int numThugs = thugs.size();
-	for(int i = 0; i < numThugs; i++) {
+	for(int i = 0; i < thugs.size(); i++) {
 		delete thugs[i];
 	}
-	delete error;
+	for(int i = 0; i < knives.size(); i++) {
+		delete knives[i];
+	}
 	delete ninja;
+	delete error;
 	delete scene;
 }
 
@@ -48,6 +48,9 @@ Ninja* GraphicsWindow::getNinja() {
 }
 
 void GraphicsWindow::fireball(int direction) {
+	if(!timer->isActive()) {
+		return;
+	}
 	Fireball* fire;
 	fire = ninja->shoot(direction);
 	if(fire != NULL) {
@@ -203,14 +206,14 @@ void GraphicsWindow::update() {
 		case 18:
 		case 19:
 		case 20:
-		thugs.push_back(new Boxer(0));
+		thugs.push_back(new Boxer(0, rand() * counter));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 		
 		case 21:
 		case 22:
 		case 23:
-		thugs.push_back(new Boxer(1));
+		thugs.push_back(new Boxer(1, rand() * counter));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 		
@@ -246,16 +249,15 @@ void GraphicsWindow::update() {
 	}
 	
 	if(ninja->lifeLost()) {
-		int numThugs = thugs.size();
-		for(int i = numThugs - 1; i >= 0; i--) {
+		for(int i = thugs.size() - 1; i >= 0; i--) {
 			delete thugs[i];
 			thugs.remove(i);
 		}
-		for(int i = 0; i < knives.size(); i++) {
+		for(int i = knives.size() - 1; i >= 0; i--) {
 			delete knives[i];
 			knives.remove(i);
 		}
-		timer->stop();
-		error->showMessage("You lost a life! Press 'p' or \"Pause/Resume\" to continue.");
+		error->showMessage("You lost a life!");
+		error->exec();
 	}
 }

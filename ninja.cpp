@@ -4,7 +4,7 @@ Ninja::Ninja() {
 	pic = new QPixmap("sprites/ninja1.png");
 	setPixmap(*pic);
 	
-	health = 100;
+	health = 10000000;
 	lives = 3;
 	dead = 0;
 	
@@ -71,6 +71,11 @@ void Ninja::update() {
 		
 	x += vx;
 	y += vy;
+	if(x < -100) {
+		x = -100;
+	} else if(x > 1025) {
+		x = 1025;
+	}
 	setPos(x,y);
 	
 	for(int i = 0; i < fireballs.size(); i++) {
