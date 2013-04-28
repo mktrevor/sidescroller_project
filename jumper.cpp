@@ -2,6 +2,9 @@
 #include <cmath>
 #include "jumper.h"
 
+/** Constructor 
+	@param side of screen
+*/
 Jumper::Jumper(bool side) {
 	pic = new QPixmap("sprites/jumper1.png");
 	altPic = new QPixmap("sprites/jumper2.png");
@@ -32,13 +35,15 @@ Jumper::Jumper(bool side) {
 	health = 4;
 }
 
-Knife* Jumper::throwKnife() { return NULL; }
-
+/** Deconstructor */
 Jumper::~Jumper() {
 	delete pic;
 	delete altPic;
 }
 
+Knife* Jumper::throwKnife() { return NULL; }
+
+/** Method to move the Jumper according to its velocity */
 void Jumper::move() {
 	if(health == 0) {
 		dead = 1;

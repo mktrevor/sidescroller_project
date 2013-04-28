@@ -1,3 +1,6 @@
+/** A message box used to ask yes/no questions
+	@author Trevor Reed
+*/
 #ifndef QUESTIONBOX_H
 #define QUESTIONBOX_H
 

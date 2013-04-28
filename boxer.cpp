@@ -1,6 +1,10 @@
 #include <iostream>
 #include "boxer.h"
 
+/** Constructor - Creates a new enemy on the specified side, and uses the input number to create random movement
+	@param side
+	@param seed number
+*/
 Boxer::Boxer(bool side, int num) {
 	pic = new QPixmap("sprites/boxer1.png");
 	altPic = new QPixmap("sprites/boxer2.png");
@@ -32,6 +36,7 @@ Boxer::Boxer(bool side, int num) {
 	health = 5;
 }
 
+/** Deconstructor - Deallocates memory */
 Boxer::~Boxer() {
 	delete pic;
 	delete altPic;
@@ -39,6 +44,7 @@ Boxer::~Boxer() {
 
 Knife* Boxer::throwKnife() { return NULL; }
 
+/** Function to move the Boxer according to its velocity and change its direction randomly */
 void Boxer::move() {
 	if(health == 0) {
 		dead = 1;

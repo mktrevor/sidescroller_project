@@ -1,3 +1,6 @@
+/** A QWidget to display a player's name, score, lives, and health
+	@author Trevor Reed
+*/
 #ifndef DISPLAYWIDGET_H
 #define DISPLAYWIDGET_H
 

@@ -1,3 +1,6 @@
+/** A class to hold the game's hero, the Magic Ninja!
+	@author Trevor Reed
+*/
 #ifndef NINJA_H
 #define NINJA_H
 

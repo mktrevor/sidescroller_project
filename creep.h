@@ -1,3 +1,6 @@
+/** Class to represent Creep enemies which drop from the top of the game window
+	@author Trevor Reed
+*/
 #ifndef CREEP_H
 #define CREEP_H
 

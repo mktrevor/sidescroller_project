@@ -1,3 +1,6 @@
+/** A class to represent jumping enemies
+	@author Trevor Reed
+*/
 #ifndef JUMPER_H
 #define JUMPER_H
 

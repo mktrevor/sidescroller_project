@@ -2,8 +2,7 @@
 
 using namespace std;
 
-/** Constructor - creates a new GraphicsWindow with either 9 or 16 tiles 
-	@param dimension of board (3 or 4)
+/** Constructor - creates a new GraphicsWindow to handle gameplay
 */
 GraphicsWindow::GraphicsWindow() {
 	error = new QErrorMessage;
@@ -20,15 +19,15 @@ GraphicsWindow::GraphicsWindow() {
   setBackgroundBrush(QImage("sprites/background1.png"));
   //setCacheMode(QGraphicsView::CacheBackground);
   timer = new QTimer;
-  timer->setInterval(70);
-  interval = 70;
+  timer->setInterval(100);
+  interval = 100;
   connect(timer, SIGNAL(timeout()), this, SLOT(update()));
   
   ninja = new Ninja();
   scene->addItem(ninja);
 }
 
-/** Deconstructor - deletes the messageBox, tiles, scene and view */
+/** Deconstructor - deletes the extra thugs as well as other components */
 GraphicsWindow::~GraphicsWindow() {
 	timer->stop();
 	delete timer;
@@ -43,10 +42,12 @@ GraphicsWindow::~GraphicsWindow() {
 	delete scene;
 }
 
+/** Returns pointer to main character */
 Ninja* GraphicsWindow::getNinja() {
 	return ninja;
 }
 
+/** Makes the ninja shoot a fireball in the specified direction */
 void GraphicsWindow::fireball(int direction) {
 	if(!timer->isActive()) {
 		return;
@@ -58,18 +59,22 @@ void GraphicsWindow::fireball(int direction) {
 	}
 }
 
+/** Returns score */
 int GraphicsWindow::getScore() {
 	return score;
 }
 
+/** Starts timer */
 void GraphicsWindow::start() {
   timer->start();
 }
 
+/** Returns pointer to timer */
 QTimer* GraphicsWindow::getTimer() {
 	return timer;
 }
 
+/** Iterates through the list of thugs and knives, calling their move functions */
 void GraphicsWindow::moveThugs() {
 	for(int i = 0; i < thugs.size(); i++) {
 		thugs[i]->move();
@@ -83,6 +88,7 @@ void GraphicsWindow::moveThugs() {
 	}
 }
 
+/** Iterates through the list of thugs, checking to see if they are dead, and removing them if necessary */
 void GraphicsWindow::checkDead() {
 	int numThugs = thugs.size();
 	for(int i = 0; i < numThugs; i++) {
@@ -94,10 +100,12 @@ void GraphicsWindow::checkDead() {
 	}
 }
 
+/** Indicates whether or not the player has died */
 bool GraphicsWindow::gameOver() {
 	return ninja->getDead();
 }
 
+/** Method to update the game window. Creates new enemies, checks for collisions, and speeds up gameplay appropriately */
 void GraphicsWindow::update() {
 	
 	checkDead();
@@ -108,12 +116,14 @@ void GraphicsWindow::update() {
 	counter += 1;
 	score++;
 	
-	if(counter > 4000/interval && interval > 15) {
-		interval -= 1;
+	//Gradually speed up the game
+	if(counter > (200 - interval) && interval > 20) {
+		interval -= 5;
 		timer->setInterval(interval);
 		counter = 0;
 	}
 	
+	//Check for collisions between all the enemies and the ninja's fireballs
 	for(int i = 0; i < thugs.size(); i++) {
 		for(int j = 0; j < ninja->getFire()->size(); j++) {
 			if(thugs[i]->collidesWithItem(ninja->getFire()->at(j))) {
@@ -124,12 +134,14 @@ void GraphicsWindow::update() {
 		}
 	}
 	
+	//Check for collisions between all the enemies and the ninja
 	for(int i = 0; i < thugs.size(); i++) {
 		if(thugs[i]->collidesWithItem(ninja)) {
 			ninja->hit();
 		}
 	}
 	
+	//Check for collisions between the ninja and the knives thrown by enemies
 	for(int i = 0; i < knives.size(); i++) {
 		if(knives[i]->collidesWithItem(ninja)) {
 			ninja->hit();
@@ -144,6 +156,7 @@ void GraphicsWindow::update() {
 		}
 	}
 	
+	//Randomly generate new enemies
 	srand(rand() * counter);
 	int num = rand() % 1200;
 	switch(num) {
@@ -248,6 +261,7 @@ void GraphicsWindow::update() {
 		break;
 	}
 	
+	//If the player loses a life, stop gameplay and delete all enemies before starting it again
 	if(ninja->lifeLost()) {
 		for(int i = thugs.size() - 1; i >= 0; i--) {
 			delete thugs[i];

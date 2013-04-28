@@ -1,7 +1,9 @@
+/** A class to represent the randomly moving "Boxer" enemies
+	@author Trevor Reed
+*/
 #ifndef BOXER_H
 #define BOXER_H
 
-#include <ctime>
 #include "thug.h"
 
 class Boxer : public Thug {

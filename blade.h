@@ -1,3 +1,6 @@
+/** A class to represent the knife-throwing "Blade" enemies
+	@author Trevor Reed
+*/
 #ifndef BLADE_H
 #define BLADE_H
 

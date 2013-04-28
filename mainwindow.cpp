@@ -95,6 +95,7 @@ void MainWindow::show() {
 	QMainWindow::show();
 }
 
+/** Quits the program. Pauses the game if one is in progress and asks for confirmation from user before exiting */
 void MainWindow::quitGame() {
 	if(!paused && gameInProgress) {
 		pause();
@@ -110,7 +111,8 @@ void MainWindow::quitGame() {
 	}
 		qApp->quit();
 }
-	
+
+/** Starts a new game, allowing for the user to enter a name */
 void MainWindow::startSlot() { 
 	question = new QuestionBox("Start a new game?", "New Game");
 	if(gameInProgress && !paused) {
@@ -156,6 +158,7 @@ void MainWindow::startSlot() {
 	setFocus();
 }
 
+/** Pauses the game */
 void MainWindow::pause() {
 	if(!gameInProgress) {
 		return;
@@ -169,6 +172,7 @@ void MainWindow::pause() {
 	setFocus();
 }
 
+/** Updates the score, health, and lives of the user. Also, shows the Game Over screen if the user has lost */
 void MainWindow::update() {
 	displayWidget->setScore(QString::number(game->getScore()));
 	displayWidget->setHealth(QString::number(game->getNinja()->getHealth()));
@@ -181,11 +185,9 @@ void MainWindow::update() {
 		gameOver = new InfoScreen(1);
 		setCentralWidget(gameOver);
 	}
-	if(!game->getTimer()->isActive()) {
-		paused = 1;
-	}
 }
 
+/** Method to handle key presses. WASD keys move the main character, arrow keys shoot fireballs, and other keys can access start, pause, and quit */
 void MainWindow::keyPressEvent(QKeyEvent *e) {
 	if(gameInProgress) {
 		if(e->key() ==  Qt::Key_D) {
@@ -221,6 +223,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 	}
 }
 
+/** Stops the ninja's movement when the keys are released */
 void MainWindow::keyReleaseEvent(QKeyEvent *e) {
 	if(gameInProgress) {
 		if(e->key() ==  Qt::Key_D || e->key() == Qt::Key_A) {

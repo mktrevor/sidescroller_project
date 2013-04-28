@@ -1,6 +1,9 @@
 #include <iostream>
 #include "bulldozer.h"
 
+/** Constructor - Creates a new enemy on the specified side
+	@param side
+*/
 Bulldozer::Bulldozer(bool side) {
 	pic = new QPixmap("sprites/bulldozer1.png");
 	altPic = new QPixmap("sprites/bulldozer2.png");
@@ -31,11 +34,13 @@ Bulldozer::Bulldozer(bool side) {
 	health = 4;
 }
 
+/** Deconstructor - Deallocates memory */
 Bulldozer::~Bulldozer() {
 	delete pic;
 	delete altPic;
 }
 
+/** Method to move Bulldozer according to its x and y velocity */
 void Bulldozer::move() {
 	if(health == 0) {
 		dead = 1;

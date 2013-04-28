@@ -1,3 +1,6 @@
+/** A class to hold "Bulldozer" enemies which move fast and inflict damage 
+	@author Trevor Reed
+*/
 #ifndef BULLDOZER_H
 #define BULLDOZER_H
 

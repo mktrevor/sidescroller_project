@@ -1,3 +1,6 @@
+/** A class to represent the fireballs that the main character shoots
+	@author Trevor Reed
+*/
 #ifndef FIREBALL_H
 #define FIREBALL_H
 

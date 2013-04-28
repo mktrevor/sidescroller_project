@@ -1,5 +1,6 @@
 #include "ninja.h"
 
+/** Default constructor - Creates a new ninja in the middle of the screen with full health and 3 lives */
 Ninja::Ninja() {
 	pic = new QPixmap("sprites/ninja1.png");
 	setPixmap(*pic);
@@ -17,28 +18,36 @@ Ninja::Ninja() {
 	setPos(x,y);
 }
 
+/** Deconstructor */
 Ninja::~Ninja() {
 	delete pic;
 }
 
+/** Method for moving right */
 void Ninja::moveRight() {
 	vx = 12;
 }
 
+/** Method for moving left */
 void Ninja::moveLeft() {
 	vx = -12;
 }
 
+/** Method for jumping. Only single jumping is allowed */
 void Ninja::jump() {	
 	if(y == 500) {
 		vy = -50;
 	}
 }
 
+/** Method to stop the ninja's movement */
 void Ninja::stop() {
 	vx = 0;
 }
 
+/** Method to create a shoot a new fireball
+	@return pointer to fireball 
+*/
 Fireball* Ninja::shoot(int direction) {
 	if(fireballs.size() < 4) {
 		fireballs.push_back(new Fireball(direction, x, y));
@@ -46,15 +55,18 @@ Fireball* Ninja::shoot(int direction) {
 	}
 	return NULL;
 }
-		
+
+/** Returns list of fireballs */
 QVector<Fireball*>* Ninja::getFire() {
 	return &fireballs;
 }
 
+/** Returns 1 for a single game cycle if the ninja loses a life */
 bool Ninja::lifeLost() {
 	return lostLife;
 }
 
+/** Method to update the ninja's position, health, lives, and fireballs */
 void Ninja::update() {
 	if(lostLife == 1) {
 		lostLife = 0;
@@ -99,18 +111,22 @@ void Ninja::update() {
 	}
 }
 
+/** Decreases health when hit */
 void Ninja::hit() {
 	health--;
 }
 
+/** Returns 1 if ninja is dead */
 bool Ninja::getDead() {
 	return dead;
 }
 
+/** Returns health */
 int Ninja::getHealth() {
 	return health;
 }
 
+/** Returns lives */
 int Ninja::getLives() {
 	return lives;
 }

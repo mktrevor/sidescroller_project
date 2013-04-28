@@ -1,4 +1,4 @@
-/** A MainWindow class to hold the game board, menus, and text boxes of a sliding tile puzzle
+/** A MainWindow class to hold the game window, menus, and text boxes of the Magic Ninja game
 
 	@author Trevor Reed
 */

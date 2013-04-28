@@ -1,5 +1,10 @@
 #include "fireball.h"
 
+/** Constructor
+	@param direction
+	@param x position
+	@param y position
+*/
 Fireball::Fireball(int direction, int xPos, int yPos) {
 	
 	switch(direction) {
@@ -43,15 +48,18 @@ Fireball::Fireball(int direction, int xPos, int yPos) {
 	setPos(x,y);
 }
 
+/** Deconstructor */
 Fireball::~Fireball() {
 	delete pic;
 }
 
+/** Returns the fireball's position */
 QPoint Fireball::getPos() {
 	QPoint pos(x,y);
 	return pos;
 }
 
+/** Updates the location of the fireball according to its velocity */
 void Fireball::update() {		
 	x += vx;
 	y += vy;

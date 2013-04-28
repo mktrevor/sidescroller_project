@@ -1,6 +1,7 @@
 #include <iostream>
 #include "creep.h"
 
+/** Constructor - Creates a new enemy in one of 6 positions */
 Creep::Creep(int pos) {
 	pic = new QPixmap("sprites/creep1.png");
 	altPic = new QPixmap("sprites/creep2.png");
@@ -54,11 +55,13 @@ Creep::Creep(int pos) {
 	health = 3;
 }
 
+/** Deconstructor - Deallocates memory */
 Creep::~Creep() {
 	delete pic;
 	delete altPic;
 }
 
+/** Method to move the enemy according to its velocity */
 void Creep::move() {
 	if(health == 0) {
 		dead = 1;

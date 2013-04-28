@@ -14,12 +14,10 @@
 The grader should use the following procedure to compile and run the code:
 ```shell
 #Compile Instructions
-echo "Write command here"
+echo "make"
 #Doxygen Instructions
-echo "Write command here"
+echo "doxygen -g config.txt
+doxygen config.txt"
 #Command to run
-echo "Write command here"
+echo "./game_trevorar"
 ```
-
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.

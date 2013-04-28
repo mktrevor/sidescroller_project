@@ -1,3 +1,6 @@
+/** A class to hold the start screen and game over screen
+	@author Trevor
+*/
 #ifndef INFOSCREEN_H
 #define INFOSCREEN_H
 

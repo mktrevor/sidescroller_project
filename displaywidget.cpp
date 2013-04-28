@@ -45,19 +45,22 @@ DisplayWidget::~DisplayWidget() {
 	delete displayLayout;
 }
 
-
+/** Sets the score value */
 void DisplayWidget::setScore(QString newScore) {
 	score->setText(newScore);
 }
 
+/** Sets the name value */
 void DisplayWidget::setName(QString newName) {
 	name->setText(newName);
 }
 
+/** Sets the lives value */
 void DisplayWidget::setLives(QString newLives) {
 	lives->setText(newLives);
 }
-	
+
+/** Sets the health value */
 void DisplayWidget::setHealth(QString newHealth) {
 	health->setText(newHealth);
 }

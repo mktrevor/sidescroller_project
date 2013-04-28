@@ -1,6 +1,9 @@
 #include <iostream>
 #include "blade.h"
 
+/** Constructor - Creates a new enemy in the specified position
+	@param position
+*/
 Blade::Blade(int pos) {
 	pic = new QPixmap("sprites/blade1.png");
 	altPic = new QPixmap("sprites/blade2.png");
@@ -63,11 +66,13 @@ Blade::Blade(int pos) {
 	health = 2;
 }
 
+/** Deconstructor - Deallocates memory */
 Blade::~Blade() {
 	delete pic;
 	delete altPic;
 }
 
+/** Moves the enemy according to its x and y velocity */
 void Blade::move() {
 	if(health == 0) {
 		dead = 1;
@@ -94,9 +99,9 @@ void Blade::move() {
 	y += vy;
 	
 	setPos(x, y);
-	
 }
 
+/** Method to create a knife object and "throw" it */
 Knife* Blade::throwKnife() {
 	int dir;
 	if(x < 500) {

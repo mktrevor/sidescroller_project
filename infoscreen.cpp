@@ -1,5 +1,8 @@
 #include "infoscreen.h"
 
+/** Constructor - Can create a title screen or game over screen 
+	@param type of screen
+*/
 InfoScreen::InfoScreen(int type) {
 
   scene = new QGraphicsScene();
@@ -14,10 +17,6 @@ InfoScreen::InfoScreen(int type) {
 		case 1:
   	background = new QImage("sprites/gameover.png");
   	break;
-  	
-		/*case 2:
-  	background = new QImage("sprites/instructions.png");
-  	break;*/
   }
 	
 	setBackgroundBrush(*background);
@@ -26,6 +25,7 @@ InfoScreen::InfoScreen(int type) {
   setMaximumSize(1200, 600);
 }
 
+/** Deconstructor */
 InfoScreen::~InfoScreen() {
 	delete background;
 	delete scene;

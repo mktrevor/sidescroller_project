@@ -1,5 +1,6 @@
 #include "questionbox.h"
 
+/** Constructor */
 QuestionBox::QuestionBox(QString text, QString title) {
 	setText(text);
 	setWindowTitle(title);
@@ -8,4 +9,5 @@ QuestionBox::QuestionBox(QString text, QString title) {
 	
 }
 
+/** Deconstructor */
 QuestionBox::~QuestionBox() { }	

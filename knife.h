@@ -1,3 +1,6 @@
+/** Class to represent the projectile thrown by "Blade" enemies
+	@author Trevor Reed
+*/
 #ifndef KNIFE_H
 #define KNIFE_H
 

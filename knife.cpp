@@ -1,5 +1,10 @@
 #include "knife.h"
 
+/** Constructor
+	@param direction
+	@param x position
+	@param y position
+*/
 Knife::Knife(int direction, int xPos, int yPos) {
 	
 	switch(direction) {
@@ -25,15 +30,18 @@ Knife::Knife(int direction, int xPos, int yPos) {
 	setPos(x,y);
 }
 
+/** Deconstructor */
 Knife::~Knife() {
 	delete pic;
 }
 
+/** Returns the knife's position */
 QPoint Knife::getPos() {
 	QPoint pos(x,y);
 	return pos;
 }
 
+/** Updates the knife's location */
 void Knife::update() {		
 	x += vx;
 	y += vy;
