@@ -4,7 +4,7 @@ Ninja::Ninja() {
 	pic = new QPixmap("sprites/ninja1.png");
 	setPixmap(*pic);
 	
-	health = 10000000;
+	health = 100;
 	lives = 3;
 	dead = 0;
 	

@@ -46,11 +46,11 @@ void Boxer::move() {
 	
 	srand(randNum);
 	randNum = rand() % 100000;
-	if(randNum > 97500 && vx < 0) {
+	if(randNum > 97000 && vx < 0) {
 		vx *= -1;
 		setPixmap(*pic);
 	}
-	if(randNum > 97500 && vx > 0) {
+	if(randNum > 97000 && vx > 0) {
 		vx *= -1;
 		setPixmap(*altPic);
 	}

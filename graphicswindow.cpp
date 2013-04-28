@@ -206,14 +206,14 @@ void GraphicsWindow::update() {
 		case 18:
 		case 19:
 		case 20:
-		thugs.push_back(new Boxer(0, rand() * counter));
+		thugs.push_back(new Boxer(0, rand() + counter));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 		
 		case 21:
 		case 22:
 		case 23:
-		thugs.push_back(new Boxer(1, rand() * counter));
+		thugs.push_back(new Boxer(1, rand() + counter));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 		
