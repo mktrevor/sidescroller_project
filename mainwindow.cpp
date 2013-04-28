@@ -26,20 +26,16 @@ MainWindow::MainWindow() {
   startButton = new QPushButton("Start (F1)");
   quitButton = new QPushButton("Quit (Esc)");
   pauseButton = new QPushButton("Pause (P)");
-  optionButton = new QPushButton("Options");
   
   connect(startButton, SIGNAL(clicked()), this, SLOT(startSlot()));
   connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
   connect(pauseButton, SIGNAL(clicked()), this, SLOT(pause()));
-  connect(optionButton, SIGNAL(clicked()), this, SLOT(options()));
   
   toolBar->addWidget(startButton);
   toolBar->addSeparator();
   toolBar->addWidget(quitButton);
   toolBar->addSeparator();
   toolBar->addWidget(pauseButton);
-  toolBar->addSeparator();
-  toolBar->addWidget(optionButton);
   
   addToolBar(toolBar);
   
@@ -51,10 +47,12 @@ MainWindow::MainWindow() {
   display->setMaximumSize(1200, 100);
   display->setFeatures(0x00);
   
-  //GAME BOARD
-  game = new GraphicsWindow();
-  setCentralWidget(game);
-  connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
+  //GAME DISPLAY
+  title = new InfoScreen(0);
+  gameOver = new InfoScreen(1);
+  instructions = new InfoScreen(2);
+  setCentralWidget(title);
+  gameInProgress = 0;
 	
 	setMinimumSize(1200, 700);
 	setMaximumSize(1200, 700);
@@ -74,7 +72,9 @@ MainWindow::~MainWindow() {
 	delete file;
 	
 	//Deallocation of game board
-	delete game;
+	if(gameInProgress) {
+		delete game;
+	}
 }
 
 /** Displays the MainWindow */
@@ -82,14 +82,24 @@ void MainWindow::show() {
 	QMainWindow::show();
 }
 
+//CHANGE THIS
 void MainWindow::startSlot() { 
-	if(game->getTimer()->isActive() || paused) {
+	if(!gameInProgress) {
+		game = new GraphicsWindow;
+		setCentralWidget(game);
+		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
+		game->start();
+		gameInProgress = 1;
+	} else if(game->getTimer()->isActive() || paused) {
 		delete game;
 		game = new GraphicsWindow;
 		setCentralWidget(game);
 		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
+		game->start();	
+		gameInProgress = 1;
+		setFocus();
+		return;
 	}
-	game->start();	
 	setFocus();
 }
 
@@ -103,44 +113,48 @@ void MainWindow::pause() {
 	setFocus();
 }
 
-void MainWindow::options() { }
-
 void MainWindow::update() {
-	if(game->gameOver()) {
-		error->showMessage("GAME OVER");
-		pause();
-	}
-	
 	displayWidget->setName(name);
 	displayWidget->setScore(QString::number(game->getScore()));
 	displayWidget->setHealth(QString::number(game->getNinja()->getHealth()));
 	displayWidget->setLives(QString::number(game->getNinja()->getLives()));
+	
+	if(game->gameOver()) {
+		gameInProgress = 0;
+		pause();
+		delete game;
+		gameOver = new InfoScreen(1);
+		setCentralWidget(gameOver);
+	}
+	
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e) {
-	if(e->key() ==  Qt::Key_D) {
-		game->getNinja()->moveRight();
-	}
-	if(e->key() == Qt::Key_A) {
-		game->getNinja()->moveLeft();
-	}
-	if(e->key() == Qt::Key_W) {
-		game->getNinja()->jump();
-	}
-	if(e->key() ==  Qt::Key_Right) {
-		game->fireball(0);
-	}
-	if(e->key() == Qt::Key_Left) {
-		game->fireball(1);
-	}
-	if(e->key() == Qt::Key_Up) {
-		game->fireball(2);
-	}
-	if(e->key() == Qt::Key_Down) {
-		game->fireball(3);
-	}
-	if(e->key() == Qt::Key_P) {
-		pause();
+	if(gameInProgress) {
+		if(e->key() ==  Qt::Key_D) {
+			game->getNinja()->moveRight();
+		}
+		if(e->key() == Qt::Key_A) {
+			game->getNinja()->moveLeft();
+		}
+		if(e->key() == Qt::Key_W) {
+			game->getNinja()->jump();
+		}
+		if(e->key() ==  Qt::Key_Right) {
+			game->fireball(0);
+		}
+		if(e->key() == Qt::Key_Left) {
+			game->fireball(1);
+		}
+		if(e->key() == Qt::Key_Up) {
+			game->fireball(2);
+		}
+		if(e->key() == Qt::Key_Down) {
+			game->fireball(3);
+		}
+		if(e->key() == Qt::Key_P) {
+			pause();
+		}
 	}
 	if(e->key() == Qt::Key_F1) {
 		startSlot();
@@ -151,7 +165,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e) {
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e) {
-	if(e->key() ==  Qt::Key_D || e->key() == Qt::Key_A) {
-		game->getNinja()->stop();
+	if(gameInProgress) {
+		if(e->key() ==  Qt::Key_D || e->key() == Qt::Key_A) {
+			game->getNinja()->stop();
+		}
 	}
 }

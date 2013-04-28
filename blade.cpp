@@ -74,9 +74,11 @@ void Blade::move() {
 
 	if(x < 500 && x > -80) {
 		vx *= -1;
+		knife = new Knife(1, x, y);
 	}
 	if(x > 500 && x < 1000) {
 		vx *= -1;
+		knife = new Knife(2, x, y);
 	}
 	
 	if(x < -250 || x > 1150) {

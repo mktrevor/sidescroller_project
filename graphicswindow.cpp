@@ -1,5 +1,6 @@
 #include "graphicswindow.h"
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -76,7 +77,7 @@ void GraphicsWindow::checkDead() {
 		if(thugs[i]->isDead() == 1) {
 			delete thugs[i];
 			thugs.remove(i);
-			score += 250;
+			score += 100;
 		}
 	}
 }
@@ -93,9 +94,7 @@ void GraphicsWindow::update() {
 	ninja->update();
 	
 	counter++;
-	if(counter % 5 == 0) {
-		score += 100;
-	}
+	score++;
 	
 	if(counter > 500 && interval > 10) {
 		interval = (interval * 4) / 5;
@@ -119,8 +118,8 @@ void GraphicsWindow::update() {
 		}
 	}
 	
-	srand(rand() * rand());
-	int num = rand() % 2000;
+	srand(rand() * counter);
+	int num = rand() % 1500;
 	switch(num) {
 		case 0:
 		thugs.push_back(new Creep(0));
@@ -154,14 +153,12 @@ void GraphicsWindow::update() {
 		
 		case 6:
 		case 7:
-		case 8:
 		thugs.push_back(new Jumper(0));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;
 		
 		case 9:
 		case 10:
-		case 11:
 		thugs.push_back(new Jumper(1));
 		scene->addItem(thugs[thugs.size()-1]);
 		break;

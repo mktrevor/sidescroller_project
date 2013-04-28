@@ -6,6 +6,7 @@ Ninja::Ninja() {
 	
 	health = 100;
 	lives = 3;
+	dead = 0;
 	
 	x = 500;
 	y = 500;
@@ -51,15 +52,6 @@ QVector<Fireball*>* Ninja::getFire() {
 }
 
 void Ninja::update() {
-	if(health == 0) {
-		lives--;
-		health = 100;
-	}
-	if(lives == 0) {
-		health = 0;
-		dead = 1;
-	}
-
 	if(y < 500) {
 		vy = vy + 6;
 	}
@@ -80,6 +72,14 @@ void Ninja::update() {
 			delete fireballs[i];
 			fireballs.remove(i);
 		}
+	}
+	if(health <= 0) {
+		lives--;
+		health = 100;
+	}
+	if(lives == 0) {
+		health = 0;
+		dead = 1;
 	}
 }
 
