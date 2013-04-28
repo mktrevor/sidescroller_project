@@ -4,7 +4,7 @@ Fireball::Fireball(int direction, int xPos, int yPos) {
 	
 	switch(direction) {
 		case 0:
-		pic = new QPixmap("sprites/fireball1.png");
+		pic = new QPixmap("sprites/fireball2.png");
 		setPixmap(*pic);
 		x = xPos + 10;
 		y = yPos;
@@ -13,7 +13,7 @@ Fireball::Fireball(int direction, int xPos, int yPos) {
 		break;
 		
 		case 1:
-		pic = new QPixmap("sprites/fireball2.png");
+		pic = new QPixmap("sprites/fireball1.png");
 		setPixmap(*pic);
 		x = xPos - 10;
 		y = yPos;

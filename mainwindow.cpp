@@ -15,7 +15,7 @@ MainWindow::MainWindow() {
   file->addAction(start);
   file->addAction(quit);
      
-  connect(quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+  connect(quit, SIGNAL(triggered()), this, SLOT(quitGame()));
   connect(start, SIGNAL(triggered()), this, SLOT(startSlot()));
   
   mb->addMenu(file);
@@ -28,7 +28,7 @@ MainWindow::MainWindow() {
   pauseButton = new QPushButton("Pause/Resume (P)");
   
   connect(startButton, SIGNAL(clicked()), this, SLOT(startSlot()));
-  connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+  connect(quitButton, SIGNAL(clicked()), this, SLOT(quitGame()));
   connect(pauseButton, SIGNAL(clicked()), this, SLOT(pause()));
   
   toolBar->addWidget(startButton);
@@ -50,7 +50,6 @@ MainWindow::MainWindow() {
   //GAME DISPLAY
   title = new InfoScreen(0);
   gameOver = new InfoScreen(1);
-  instructions = new InfoScreen(2);
   setCentralWidget(title);
   gameInProgress = 0;
 	
@@ -82,8 +81,23 @@ void MainWindow::show() {
 	QMainWindow::show();
 }
 
-//CHANGE THIS
+void MainWindow::quitGame() {
+	question = new QuestionBox("Are you sure you want to quit?", "Quit Game");
+	if(question->exec() == QMessageBox::No) {
+		setFocus();
+		delete question;
+		return;
+	}
+		qApp->quit();
+}
+	
 void MainWindow::startSlot() { 
+	question = new QuestionBox("Start a new game?", "New Game");
+	if(question->exec() == QMessageBox::No) {
+		setFocus();
+		delete question;
+		return;
+	}
 	if(!gameInProgress) {
 		game = new GraphicsWindow;
 		setCentralWidget(game);
@@ -98,7 +112,6 @@ void MainWindow::startSlot() {
 		game->start();	
 		gameInProgress = 1;
 	}
-
 	setFocus();
 }
 

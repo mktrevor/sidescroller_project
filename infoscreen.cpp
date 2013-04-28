@@ -8,16 +8,16 @@ InfoScreen::InfoScreen(int type) {
 	
 	switch(type) {
 		case 0:
-  	background = new QImage("sprites/title.png");
+  	background = new QImage("sprites/titlescreen.png");
   	break;
   	
 		case 1:
   	background = new QImage("sprites/gameover.png");
   	break;
   	
-		case 2:
+		/*case 2:
   	background = new QImage("sprites/instructions.png");
-  	break;
+  	break;*/
   }
 	
 	setBackgroundBrush(*background);

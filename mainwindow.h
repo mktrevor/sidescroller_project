@@ -24,10 +24,12 @@
 #include <QLineEdit>
 #include <QKeyEvent>
 #include <QHBoxLayout>
+#include <QInputDialog>
 #include <cstdlib>
 #include "displaywidget.h"
 #include "graphicswindow.h"
 #include "infoscreen.h"
+#include "questionbox.h"
 #include "ninja.h"
 
 class MainWindow : public QMainWindow {
@@ -61,7 +63,6 @@ class MainWindow : public QMainWindow {
 		//Extra screens
 		InfoScreen *title;
 		InfoScreen *gameOver;
-		InfoScreen *instructions;
 		
 		//Top dock widget (for showing score, name, health, etc.)
 		QDockWidget *display;
@@ -69,6 +70,8 @@ class MainWindow : public QMainWindow {
 		
 		//Message for errors, etc.
 		QErrorMessage *error;
+		QuestionBox *question;
+		QInputDialog *inputName;
     
     //Keyboard commands
     void keyPressEvent(QKeyEvent *e);
@@ -77,6 +80,7 @@ class MainWindow : public QMainWindow {
 	public slots:
 		void startSlot();
 		void pause();
+		void quitGame();
 		
 		void update();
 };
