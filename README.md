@@ -16,8 +16,8 @@ The grader should use the following procedure to compile and run the code:
 #Compile Instructions
 echo "make"
 #Doxygen Instructions
-echo "doxygen -g config.txt
-doxygen config.txt"
+echo "doxygen -g config.txt"
+echo "doxygen config.txt"
 #Command to run
 echo "./game_trevorar"
 ```

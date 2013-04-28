@@ -17,7 +17,6 @@ GraphicsWindow::GraphicsWindow() {
   setMaximumSize(1200, 600);
   
   setBackgroundBrush(QImage("sprites/background1.png"));
-  //setCacheMode(QGraphicsView::CacheBackground);
   timer = new QTimer;
   timer->setInterval(100);
   interval = 100;
@@ -113,12 +112,12 @@ void GraphicsWindow::update() {
 	
 	ninja->update();
 	
-	counter += 1;
+	counter += interval/5;
 	score++;
 	
 	//Gradually speed up the game
-	if(counter > (200 - interval) && interval > 20) {
-		interval -= 5;
+	if(counter > 500 && interval > 25) {
+		interval -= 2;
 		timer->setInterval(interval);
 		counter = 0;
 	}
@@ -158,7 +157,7 @@ void GraphicsWindow::update() {
 	
 	//Randomly generate new enemies
 	srand(rand() * counter);
-	int num = rand() % 1200;
+	int num = rand() % 1000;
 	switch(num) {
 		case 0:
 		thugs.push_back(new Creep(0));

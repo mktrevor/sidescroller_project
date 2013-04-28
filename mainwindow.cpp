@@ -140,6 +140,7 @@ void MainWindow::startSlot() {
 		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 		game->start();
 		gameInProgress = 1;
+		paused = 0;
 	} else if(game->getTimer()->isActive() || paused) {
 		bool ok;
 		name = inputName->getText(this, tr("Name"), tr("Please enter your name."), QLineEdit::Normal, "", &ok);
@@ -154,6 +155,7 @@ void MainWindow::startSlot() {
 		connect(game->getTimer(), SIGNAL(timeout()), this, SLOT(update()));
 		game->start();	
 		gameInProgress = 1;
+		paused = 0;
 	}
 	setFocus();
 }
