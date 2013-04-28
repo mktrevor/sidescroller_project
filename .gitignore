@@ -2,6 +2,8 @@
 *.slo
 *.lo
 *.o
+*.moc
+*.obj
 
 # Compiled Dynamic libraries
 *.so
@@ -11,3 +13,42 @@
 *.lai
 *.la
 *.a
+
+# Executables
+*.exe
+*.out
+
+# Editor Temporary Files
+.*.sw[a-z]
+*~
+\#*\#
+*.tmp
+*.bak
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+.Trashes
+.Trash
+
+# Other files
+config.txt
+game_trevorar
+game_trevorar.pro
+html/
+latex/
+moc_displaywidget.cpp
+moc_graphicswindow.cpp
+moc_infoscreen.cpp
+moc_mainwindow.cpp
