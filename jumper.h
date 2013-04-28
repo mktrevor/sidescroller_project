@@ -11,6 +11,7 @@ class Jumper : public Thug {
 		Jumper(bool side);
 		~Jumper();
 		void move();
+		Knife* throwKnife();
 };
 		
 #endif

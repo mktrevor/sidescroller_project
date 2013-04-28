@@ -7,13 +7,12 @@
 class Blade : public Thug {
 	private:
 		QPixmap *altPic;
-		Knife* knife;
 		
 	public:
 		Blade(int pos);
 		~Blade();
 		void move();
-		Knife* getKnife();
+		Knife* throwKnife();
 };
 		
 #endif

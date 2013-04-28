@@ -6,7 +6,8 @@ Boxer::Boxer(bool side) {
 	altPic = new QPixmap("sprites/boxer2.png");
 	
 	dead = 0;
-	randNum = 481516;
+	checkKnife = 0;
+	randNum = 48151623;
 	
 	if(side == 0) {
 		x = -200;
@@ -35,6 +36,8 @@ Boxer::~Boxer() {
 	delete pic;
 	delete altPic;
 }
+
+Knife* Boxer::throwKnife() { return NULL; }
 
 void Boxer::move() {
 	if(health == 0) {

@@ -6,6 +6,7 @@ Bulldozer::Bulldozer(bool side) {
 	altPic = new QPixmap("sprites/bulldozer2.png");
 	
 	dead = 0;
+	checkKnife = 0;
 	
 	if(side == 0) {
 		x = -200;
@@ -52,5 +53,6 @@ void Bulldozer::move() {
 	y += vy;
 	
 	setPos(x, y);
-	
 }
+
+Knife* Bulldozer::throwKnife() { return NULL; }

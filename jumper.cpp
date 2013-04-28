@@ -7,6 +7,7 @@ Jumper::Jumper(bool side) {
 	altPic = new QPixmap("sprites/jumper2.png");
 	
 	dead = 0;
+	checkKnife = 0;
 	
 	if(side == 0) {
 		x = -200;
@@ -30,6 +31,8 @@ Jumper::Jumper(bool side) {
 	
 	health = 4;
 }
+
+Knife* Jumper::throwKnife() { return NULL; }
 
 Jumper::~Jumper() {
 	delete pic;

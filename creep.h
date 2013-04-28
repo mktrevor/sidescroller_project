@@ -11,6 +11,7 @@ class Creep : public Thug {
 		Creep(int pos);
 		~Creep();
 		void move();
+		Knife* throwKnife();
 };
 		
 #endif

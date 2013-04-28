@@ -6,6 +6,7 @@ Creep::Creep(int pos) {
 	altPic = new QPixmap("sprites/creep2.png");
 	
 	dead = 0;
+	checkKnife = 0;
 	
 	switch(pos) {
 		case 0:
@@ -81,3 +82,5 @@ void Creep::move() {
 	
 	setPos(x, y);
 }
+
+Knife* Creep::throwKnife() { return NULL; }

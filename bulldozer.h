@@ -11,6 +11,7 @@ class Bulldozer : public Thug {
 		Bulldozer(bool side);
 		~Bulldozer();
 		void move();
+		Knife* throwKnife();
 };
 		
 #endif
